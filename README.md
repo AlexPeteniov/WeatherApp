@@ -20,6 +20,7 @@ The goal is to create a weather app, where you can search for a city and receive
 
 
 ### Setup Vue project: 
+```
 ? Please pick a preset: Manually select features
 ? Check the features needed for your project: Babel, Router, Vuex, CSS Pre-processors, Linter, Unit
 ? Use history mode for router? (Requires proper server setup for index fallback in production) Yes
@@ -29,3 +30,4 @@ The goal is to create a weather app, where you can search for a city and receive
 ? Pick a unit testing solution: Jest
 ? Where do you prefer placing config for Babel, PostCSS, ESLint, etc.? In dedicated config files
 ? Save this as a preset for future projects? No
+```
