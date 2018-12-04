@@ -4,23 +4,14 @@
       text-xs-center
       wrap
     >
-        <v-flex xs12>
-          <v-img
-            :src="require('../assets/openw.png')"
-            class="my-3"
-            contain
-            height="50"
-          ></v-img>
-        </v-flex>
       <v-flex xs12>
         <v-img
-          :src="require('../assets/Rain.gif')"
+          :src="require('../assets/openw.png')"
           class="my-3"
           contain
-          height="250"
+          height="50"
         ></v-img>
       </v-flex>
-
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">
           Welcome to Weather Cloud
@@ -29,113 +20,67 @@
           Current weather and forecasts in your city
         </p>
       </v-flex>
-    </v-layout>
-    <v-toolbar
-      color="orange accent-1"
-      prominent
-      tabs
-    >
-      <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title class="title mr-4">Cryptocurrency</v-toolbar-title>
-      <v-autocomplete
-        v-model="model"
-        :items="items"
-        :loading="isLoading"
-        :search-input.sync="search"
-        chips
-        clearable
-        hide-details
-        hide-selected
-        item-text="name"
-        item-value="symbol"
-        label="Search for a coin..."
-        solo
-      >
-        <template slot="no-data">
-          <v-list-tile>
-            <v-list-tile-title>
-              Search for your favorite
-              <strong>Cryptocurrency</strong>
-            </v-list-tile-title>
-          </v-list-tile>
-        </template>
-        <template
-          slot="selection"
-          slot-scope="{ item, selected }"
-        >
-          <v-chip
-            :selected="selected"
-            color="blue-grey"
-            class="white--text"
-          >
-            <v-icon left>mdi-coin</v-icon>
-            <span v-text="item.name"></span>
-          </v-chip>
-        </template>
-        <template
-          slot="item"
-          slot-scope="{ item, tile }"
-        >
-          <v-list-tile-avatar
-            color="indigo"
-            class="headline font-weight-light white--text"
-          >
-            {{ item.name.charAt(0) }}
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.name"></v-list-tile-title>
-            <v-list-tile-sub-title v-text="item.symbol"></v-list-tile-sub-title>
-          </v-list-tile-content>
-          <v-list-tile-action>
-            <v-icon>mdi-coin</v-icon>
-          </v-list-tile-action>
-        </template>
-      </v-autocomplete>
-      <v-tabs
-        slot="extension"
-        :hide-slider="!model"
-        color="transparent"
-        slider-color="blue-grey"
-      >
-        <v-tab :disabled="!model">News</v-tab>
-        <v-tab :disabled="!model">Trading</v-tab>
-        <v-tab :disabled="!model">Blog</v-tab>
-      </v-tabs>
-    </v-toolbar>
-  </v-container>
 
+      <v-flex xs12>
+        <v-img
+          :src="require('../assets/Rain.gif')"
+          class="my-3"
+          contain
+          height="250"
+        ></v-img>
+      </v-flex>
+      <div class="container">
+        <br/>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm">
+              <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-search h4 text-body"></i>
+                </div>
+                <!--end of col-->
+                <div class="col">
+                  <input  class="form-control form-control-lg form-control-borderless" id ="userInput" type="search" placeholder="Search topics or keywords">
+                </div>
+                <!--end of col-->
+                <div class="col-auto">
+                  <button class="btn btn-lg btn-success" type="submit" onclick="SaveName()">Search</button>
+                </div>
+
+                <!--end of col-->
+              </div>
+            </form>
+          </div>
+          <!--end of col-->
+        </div>
+      </div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
+  import {getWeatherForCityname} from '../api.js'
   export default {
-    data: () => ({
-      isLoading: false,
-      items: [],
-      model: null,
-      search: null
-    }),
+    methods: {
+  SaveName()
+  {
+    cityName = document.getElementById("userInput").value;
+    getWeatherForCityname(this.cityName).then(data => {
+      this.data = data
+    })
+  }}}
 
-    watch: {
-      search (val) {
-        // Items have already been loaded
-        if (this.items.length > 0) return
 
-        this.isLoading = true
-
-        // Lazily load input items
-        window.axios.get('https://api.coinmarketcap.com/v2/listings/')
-          .then(res => {
-            this.items = res.data.data
-          })
-          .catch(err => {
-            console.log(err)
-          })
-          .finally(() => (this.isLoading = false))
-      }
-    }
-  }
 </script>
 
-<style>
+<style >
+  .form-control-borderless {
+    border: none;
+  }
 
+  .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
 </style>

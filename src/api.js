@@ -1,39 +1,19 @@
 import axios from 'axios'
 window.axios = axios;
 
-const config= {
-  apiKey: process.env.APIID,
-}
+const baseURL = "https://openweathermap.com/api";
+const httpRequester = axios.create({
+  baseURL
+});
 
-export default {
-    name: 'app',
-    data () {
-      return {
-        msg: 'Welcome to CryptoCurrency Converter',
-        currencys: [
-          {name : "USD", desc:"US Dollar"},
-          {name:"EUR", desc:"Euro"},
-
-        ],
-        convertfrom:'BIT',
-        convertto:'',
-        amount :'',
-        info:'',
-        results:''
-      }
-
-    },
-    filters: {
-      currencydecimal (value) {
-        return value.toFixed(2)
-      }
-    },
-    mounted() {
-
-      axios
-        .get('https://api.coinmarketcap.com/v2/ticker/?convert=EUR&limit=10')
-        .then(response => (this.results = response.data.data));
+export function getWeatherForCityname(cityName) {
+  const requestConfig = {
+    method: 'get',
+    url: `city/${cityName}`,
+    headers: {
+      apiKey: a4fecf182bf752df2d988d2cde817b94
     }
-
+  }
+  return httpRequester(requestConfig)
+    .then(result => result.data)
 }
-
