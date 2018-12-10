@@ -1,86 +1,111 @@
 <template>
-  <v-container>
-    <v-layout
-      text-xs-center
-      wrap
-    >
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/openw.png')"
-          class="my-3"
-          contain
-          height="50"
-        ></v-img>
-      </v-flex>
-      <v-flex mb-4>
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Weather Cloud
-        </h1>
-        <p class="subheading font-weight-regular">
-          Current weather and forecasts in your city
-        </p>
-      </v-flex>
+    <v-container>
+        <v-layout
+            text-xs-center
+            wrap
+        >
+            <v-flex xs12>
+                <v-img
+                    :src="require('../assets/openw.png')"
+                    class="my-3"
+                    contain
+                    height="50"
+                ></v-img>
+            </v-flex>
+            <v-flex mb-4>
+                <h1 class="display-2 font-weight-bold mb-3">
+                    Welcome to Weather Cloud
+                </h1>
+                <p class="subheading font-weight-regular">
+                    Current weather and forecasts in your city
+                </p>
+            </v-flex>
 
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/Rain.gif')"
-          class="my-3"
-          contain
-          height="250"
-        ></v-img>
-      </v-flex>
-      <div class="container">
-        <br/>
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
-              <div class="card-body row no-gutters align-items-center">
-                <div class="col-auto">
-                  <i class="fas fa-search h4 text-body"></i>
-                </div>
-                <!--end of col-->
-                <div class="col">
-                  <input  class="form-control form-control-lg form-control-borderless" id ="userInput" type="search" placeholder="Search topics or keywords">
-                </div>
-                <!--end of col-->
-                <div class="col-auto">
-                  <button class="btn btn-lg btn-success" type="submit" onclick="SaveName()">Search</button>
-                </div>
+            <v-flex xs12>
+                <v-img
+                    :src="require('../assets/Rain.gif')"
+                    class="my-3"
+                    contain
+                    height="250"
+                ></v-img>
+            </v-flex>
+            <div class="container">
+                <br/>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <form class="card card-sm">
+                            <div class="card-body row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <i class="fas fa-search h4 text-body"></i>
+                                </div>
+                                <!--end of col-->
+                                <div class="col">
+                                    <input class="form-control form-control-lg form-control-borderless"
+                                           v-model="cityName"
+                                           id="userInput" type="search"
+                                           placeholder="Search topics or keywords">
+                                </div>
+                                <!--end of col-->
+                                <div class="col-auto">
+                                    <button class="btn btn-lg btn-success" type="submit" onclick="saveName()">Search
+                                    </button>
+                                </div>
 
-                <!--end of col-->
-              </div>
-            </form>
-          </div>
-          <!--end of col-->
-        </div>
-      </div>
-    </v-layout>
-  </v-container>
+                                <!--end of col-->
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--end of col-->
+                    <span>{{this.weatherData.pressure}}</span>
+                </div>
+            </div>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
-  import {getWeatherForCityname} from '../api.js'
-  export default {
-    methods: {
-  SaveName()
-  {
-    cityName = document.getElementById("userInput").value;
-    getWeatherForCityname(this.cityName).then(data => {
-      this.data = data
-    })
-  }}}
 
+    import {getWeatherForCityname} from '../api.js'
+    export default {
+        data() {
+            return {
+                weatherData: '',// add all your data attributes here which you want to refrence with this.bla
+                cityName: '',// this property is referenced by v-model="cityName" in the template
+                currentTemp: '',
+                minTemp: '',
+                maxTemp:'',
+                sunrise: '',
+                sunset: '',
+                pressure: '',
+                humidity: '',
 
+            }
+        },
+
+        methods:
+            {
+            saveName() { // method names should start with a small letter
+                // cityName = document.getElementById('userInput').value // no need for this, use v-model
+
+                getWeatherForCityname(this.cityName) // now this works, because cityName is in data
+                    .then(data => {
+                        // avoid using this.data.. better give a better name like this.weatherData
+                        this.weatherData = data
+                    })
+            }
+        }
+    }
 </script>
 
-<style >
-  .form-control-borderless {
-    border: none;
-  }
+<style>
+    .form-control-borderless {
+        border: none;
+    }
 
-  .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
-  }
+    .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
 </style>
