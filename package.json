@@ -16,6 +16,7 @@
     "firebase": "^5.5.9",
     "google-locations": "^0.2.0",
     "googleplaces": "^0.6.1",
+    "nuxt": "^2.3.4",
     "vue": "^2.5.17",
     "vue-clickaway": "^2.2.2",
     "vue-resource": "^1.5.1",
