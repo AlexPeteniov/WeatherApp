@@ -45,15 +45,17 @@
                                     <input class="form-control form-control-lg form-control-borderless"
                                            v-model="cityName"
                                            id="userInput" type="search"
-                                           placeholder="Search topics or keywords">
+                                           placeholder="Search your lovely city">
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-lg btn-success" type="submit">Search
+                                    <button class="btn btn-lg btn-success" type="submit" >Search
                                     </button>
+
                                 </div>
 
                             </div>
                         </form>
+                        <router-link to="/Search">Перейти к Search</router-link>
                     </div>
 
                     <!--end of col-->
@@ -78,7 +80,7 @@
         methods:
             {
                 saveName() {
-                    this.$router.push({path: '/search', params: {cityName: this.cityName}})
+                    this.$router.push({path: '/Search', params: {cityName: this.cityName}})
                 }
             },
     }

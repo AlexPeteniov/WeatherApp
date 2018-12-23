@@ -1,5 +1,6 @@
 <template>
     <div class="row">
+        <router-view></router-view>
         <div id="weather">
             <v-img :src="require('../assets/images/vue-weather.svg')"></v-img>
             {{overcast}}
@@ -22,9 +23,12 @@
 </template>
 
 <script>
-    import {getWeatherForCityname} from '../api.js'
-
+    import {getWeatherForCityname} from '../api.js';
+    import HelloWorld from './HelloWorld.vue';
     export default {
+
+        name:'Search',
+        props:['cityName'],
 
         data() {
             return {
@@ -61,7 +65,7 @@
                             this.sunrise = new Date(response.sys.sunrise*1000).toLocaleTimeString("en-GB").slice(0,4);
                             this.sunset = new Date(response.sys.sunset*1000).toLocaleTimeString("en-GB").slice(0,4);
                         });
-        }}
+        }};
 </script>
 
 <style>
