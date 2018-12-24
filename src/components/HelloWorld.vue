@@ -55,7 +55,6 @@
 
                             </div>
                         </form>
-                        <router-link to="/Search">Перейти к Search</router-link>
                     </div>
 
                     <!--end of col-->
@@ -80,7 +79,7 @@
         methods:
             {
                 saveName() {
-                    this.$router.push({path: '/Search', params: {cityName: this.cityName}})
+                    this.$router.push({path: '/search', params: {cityName: this.cityName}})
                 }
             },
     }

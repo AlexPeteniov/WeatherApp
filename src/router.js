@@ -5,24 +5,25 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/City',
-      name: 'City',
-      component: () => import( './components/City.vue')
-    },
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: Home
+        },
 
-    {
-      path: '/Search',
-      name: 'Search',
-      component: () => import( './components/Search.vue')
-    }
-  ]
+        {
+            path: './city',
+            name: 'City',
+            component: () => import( './components/City.vue')
+        },
+
+        {
+            path: './search',
+            name: 'Search',
+            component: () => import( './components/Search.vue')
+        }
+    ]
 })

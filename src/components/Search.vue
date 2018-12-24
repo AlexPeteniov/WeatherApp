@@ -1,6 +1,5 @@
 <template>
     <div class="row">
-        <router-view></router-view>
         <div id="weather">
             <v-img :src="require('../assets/images/vue-weather.svg')"></v-img>
             {{overcast}}
