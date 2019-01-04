@@ -1,24 +1,10 @@
 <template>
-  <v-app>
+  <div id="app">
+    <div id="nav">
+        <a href="/">Home</a> |
+      <router-link to="/search">Search</router-link>
+    </div>
+      <router-view></router-view>
 
-  <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+  </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      //
-    }
-  }
-}
-</script>

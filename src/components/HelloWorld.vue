@@ -79,16 +79,16 @@
         methods:
             {
                 saveName() {
-                    this.$router.push({path: '/search', params: {cityName: this.cityName}})
+                    this.$router.push({path: '/search',
+                        name: 'search',
+                        params: {cityName: this.cityName}})
                 }
             },
     }
 </script>
 
 <style>
-    .form-control-borderless {
-        border: none;
-    }
+
 
     .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
         border: none;

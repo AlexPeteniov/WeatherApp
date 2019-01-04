@@ -12,18 +12,13 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home
-        },
 
-        {
-            path: './city',
-            name: 'City',
-            component: () => import( './components/City.vue')
         },
-
         {
-            path: './search',
-            name: 'Search',
-            component: () => import( './components/Search.vue')
+            path: '/search',
+            name: 'search',
+            props: true,
+            component: () => import( './views/Search.vue')
         }
     ]
 })
