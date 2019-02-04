@@ -49,10 +49,11 @@
                 <div v-else-if="iconID ==800">
                     <v-img class="icon" :src="require('../assets/images/Clear.svg')"></v-img>
                 </div>
-                <span><b>{{overcast }}</b></span><br>
+                <br>
+                <span><b>&nbsp; &nbsp;{{overcast }}</b></span><br>
             </div>
             <div class="col-4" id="temperature">
-                <span class="temperature">{{ currentTemp}}&nbsp;{{ cityName }}</span><br>
+                <span class="temperature">{{ currentTemp}}<br>&nbsp;{{ cityName }}</span><br>
             </div>
         </div>
     </div>
@@ -155,7 +156,7 @@
         text-shadow: 1px 1px 2px black;
         font-size: 35px;
         margin-top:170px ;
-        margin-left: 50px;
+        margin-left: -40px;
 
     }
 

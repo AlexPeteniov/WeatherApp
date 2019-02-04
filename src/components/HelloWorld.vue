@@ -95,4 +95,6 @@
         outline: none;
         box-shadow: none;
     }
+    .container {
+        padding: 0px;}
 </style>
